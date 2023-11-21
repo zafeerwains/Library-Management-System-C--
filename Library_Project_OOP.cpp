@@ -13,7 +13,7 @@ public:
 	{
 		int book_id;
 		char book_name[50], book_author[50];
-		fstream fobj("lib_book_details.txt", ios::out | ios::app);
+		fstream save("lib_book_details.txt", ios::out | ios::app);
 
 		cout << "\nEnter book ID : ";
 		cin >> book_id;
@@ -26,15 +26,15 @@ public:
 		cin.getline(book_author, 50);
 
 
-		fobj << " " << book_id << "      " << book_name << "      " << book_author << endl;
-		fobj.close();
+		save << " " << book_id << "      " << book_name << "      " << book_author << endl;
+		save.close();
 
 		cout << "\n--------Successfully Saved--------";
 	}
 
 	void searchBookDetails()
 	{
-		fstream fobj1("lib_book_details.txt", ios::in);
+		fstream saveFile("lib_book_details.txt", ios::in);
 	label_search:
 		cout << "\n\nSEARCH MENU ";
 		cout << "\n1. Display all";
@@ -50,13 +50,13 @@ public:
 		case 1:
 			char str_line[500];
 			char str_line1[500];
-			if (fobj1.getline(str_line1, 500))
+			if (saveFile.getline(str_line1, 500))
 			{
 				cout << "\n\n================================================================================";
 				
 				cout << "\n\n" << str_line1;
 
-				while (fobj1.getline(str_line, 500))
+				while (saveFile.getline(str_line, 500))
 				{
 					cout << "\n\n" << str_line;
 				}
@@ -75,10 +75,10 @@ public:
 			cin.getline(bookname, 50);
 			if (fobj1.getline(str_line2, 500))
 			{
-				fobj1.seekg(0, ios::beg);
+				saveFile.seekg(0, ios::beg);
 				int s = 1;
 				cout << "\n\n================================================================================";
-				while (fobj1.getline(str_line2, 500))
+				while (saveFile.getline(str_line2, 500))
 				{
 					if (strstr(str_line2, bookname) != NULL )
 					{
@@ -113,7 +113,7 @@ public:
 			goto label_search;
 			break;
 		}
-		fobj1.close();
+		saveFile.close();
 	}
 
 	void delete_book()
@@ -174,7 +174,7 @@ public:
 		
 
 		
-		if (admin_pass == "admin")
+		if (admin_pass == "ammara")
 		{
 			cout << "\a";
 			cout << "\n\nADMINISTRATOR MENU";
@@ -257,7 +257,7 @@ public:
 				cout << "*";
 			}
 		}
-		if (lib_pass == "library")
+		if (lib_pass == "ammara")
 		{
 			cout << "\a";
 			BookIssueReturn bIR;
@@ -582,23 +582,10 @@ public:
 	}
 };
 
-void about()
-{
-	fstream about_out("lib_about.txt", ios::in);
-	char about_str[500];
-	cout << "\n\n==========================================================================================\n\n";
-	about_out.seekg(0, ios::beg);
-	while (about_out.getline(about_str, 500))
-	{
-		cout << about_str << endl;
-	}
-	cout << "\n==========================================================================================\n";
-	about_out.close();
-}
 
 int main()
 {
-	system("COLOR 1F");
+	system("COLOR 3E");
 	char date[10];
 	cout << "\n                                   ** LIBRARY MANAGEMENT SOFTWARE **                                   " << _strdate(date);
 	BookOperation bo;
@@ -616,7 +603,7 @@ label_main:
 			cout << "*";
 		}
 	}
-	if (pass == "project")
+	if (pass == "ammara")
 	{
 		cout << "\a";
 		int choice;
@@ -627,10 +614,10 @@ label_main:
 			cout << "\n2. Search Book Details";
 			cout << "\n3. Administrator Menu";
 			cout << "\n4. Issue and Return Section";
-			cout << "\n5. About";
-			cout << "\n6. Exit Program";
+			cout << "\n5. Exit Program";
 
-			cout << "\nEnter your choice (1-6) : ";
+
+			cout << "\nEnter your choice (1-5) : ";
 			cin >> choice;
 
 			switch (choice)
@@ -647,10 +634,8 @@ label_main:
 			case 4:
 				bir.issue_return();
 				break;
+		
 			case 5:
-				about();
-				break;
-			case 6:
 				Sleep(500);
 				cout << "\n\nExiting ";
 				for (int i = 0; i <= 4; i++)
