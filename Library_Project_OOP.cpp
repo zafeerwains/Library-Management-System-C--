@@ -73,7 +73,7 @@ public:
 			char bookname[10];
 			cin.ignore();
 			cin.getline(bookname, 50);
-			if (fobj1.getline(str_line2, 500))
+			if (saveFile.getline(str_line2, 500))
 			{
 				saveFile.seekg(0, ios::beg);
 				int s = 1;
